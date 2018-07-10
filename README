@@ -1,0 +1,52 @@
+In ceea ce priveste structurile de date folosite in tema mea, pe langa cele doua
+deja propuse, am mai definit alte 3 structuri,pe care le-am inclus in fisierul
+tema3.c.Prima structura - "input_file" stocheaza tot ceea ce
+se gaseste in fisierul de intrare, pe care executabilul nostru il primeste ca si
+parametru la fiecare rulare. A doua structura - "pixel", dupa un principiu
+asemanator cu cel de la tema anterioara, contine informatii cu privire la un pixel
+si anume valorile R, G si B.In final,ultima structura contine informatii cu
+privire la imaginea cu care lucrez si anume, informatii cu privire la header,
+infoheader si matricea de pixeli. Totul este dinamic in ceea ce priveste aceasta
+structura.
+
+Dupa ce am citit fisierul de input si am generat o structura pentru acesta, va
+trebui sa citim imaginea propriu-zisa. Aceasta se va citi in mod binar.
+Se incepe cu citirea headerului, infoheaderului si apoi se continua cu matricea
+de pixeli. Cand am rezolvat tema, am avut o problema la citire si la scriere.
+Nu am fost foarte atenta atunci cand am citit enuntul temei si modul in care
+sunt organizate fisierele de tip BMP si dupa ce citeam headerele, nu tineam cont
+si de offsetul la care se regasea matricea de pixeli, nu faceam niciun seek si
+ajungeam sa citesc niste date putin decalate. In acest fel, fara sa fac nicio
+prelucrare, imaginea generata de mine era foarte putin diferita de cea initiala.
+In rest nu au mai fost probleme la citire, am folosit exemplul de pe Wikipedia
+pentru a intelege cum este rasturnata matricea de pixeli si cum va trebui sa o
+stochez eu.
+
+Scrierea unei imagini a fost o operatie similara cu cea de citire.
+De fapt, asa cum se poate si observa operatia de scriere urmeaza fix aceiasi
+pasi.
+
+In ceea ce priveste cele doua task-uri pe care le-am implementat, pentru primul
+task, am copiat cele doua headere asa cum sunt intr-o noua locatie de memorie
+pe care am alocat-o pentru matricea black_and_white. Apoi, am iterat peste toti
+pixelii existenti in matrice si le-am modificat valorile ca si o medie a valorilor
+RGB din fiecare.
+
+La al doilea task am procedat intocmai ca la primul:am mai copiat cele 2 headere 
+intr-o noua locatie de memorie alocata pentru fiecare matrice aferenta unui 
+filtru din cele 3 cerute(image_f1,image_f2,image_f3).Am iterat si aici peste 
+pixelii matricei,iar apoi am tratatat fiecare pixel al imaginii in parte,in 
+functie de pozitia lui cand am aplicat filtrele,deoarece nu stim cati vecini 
+ai lui sunt nuli si astfel nu pot face suma corecta.Aceasta metoda seamana 
+putin si cu operatia blur de la tema precedenta.In final am stabilit o limita 
+intre 0 si 255 pentru valorile pixelilor.
+
+Dupa prelucrearea imaginilor,pentru a evita memory leaks,am mai adaugat si o 
+functie ce va face aceasta sarcina,ocupandu-se de eliberarea memoriei 
+pentru tot ce am alocat dinamic inainte:header,infoheader etc.
+
+Trebuie sa ma ocup si de modificarea numelui fisierelor obtinute in urma taskurilor.
+Pentru asta voi prelua tot numele fisierului pana la intalnirea extensiei si il voi 
+concatena cu ceea ce este scris la fiecare cerinta.
+
+Puisor Oana-Daniela 311CD
